@@ -1,0 +1,9 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Solo los usuarios con sesión iniciada pueden leer y escribir lugares.
+    match /lugares/{lugarId} {
+      allow read, write: if request.auth != null;
+    }
+  }
+}
